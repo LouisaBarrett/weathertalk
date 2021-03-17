@@ -1,0 +1,32 @@
+body, html {
+  height: 100%;
+  margin: 0;
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
+header {
+  background: #ccc;
+  padding: 10px 25px 20px;
+}
+
+.main-wrap {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  height: 100%;
+}
+
+aside {
+  background: cyan;
+  padding: 16px;
+  display: flex;
+}
+
+section {
+  background: coral;
+  padding: 0 10px;
+  display: flex;
+}
+
+label, input {
+  width: 100%;
+}
