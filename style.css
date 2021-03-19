@@ -18,13 +18,15 @@ header {
 aside {
   background: cyan;
   padding: 16px;
-  display: flex;
 }
 
 section {
   background: coral;
   padding: 0 10px;
-  display: flex;
+}
+
+ul {
+  list-style: none;
 }
 
 label, input {
