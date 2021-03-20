@@ -1,4 +1,4 @@
-# Introduction to the Open Weather Map API
+# Introduction to the OpenWeather Current Weather Data API
 
 <!-- outline / structure notes -->
 
