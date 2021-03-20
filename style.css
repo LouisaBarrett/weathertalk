@@ -2,11 +2,16 @@ body, html {
   height: 100%;
   margin: 0;
   font-family: 'Noto Sans JP', sans-serif;
+  color: #001F3F;
+}
+
+h1, h3 {
+  color: #6DB4FD;
 }
 
 header {
-  background: #ccc;
-  padding: 10px 25px 20px;
+  background: #001F3F;
+  padding: 20px 35px;
 }
 
 .main-wrap {
@@ -16,13 +21,18 @@ header {
 }
 
 aside {
-  background: cyan;
-  padding: 16px;
+  background: white;
+  padding: 20px 35px;
+  border-right: 2px solid #808F9F;
+}
+
+form {
+  margin-top: 19.92px;
 }
 
 section {
-  background: coral;
-  padding: 0 10px;
+  background: linear-gradient(to bottom right, #DFE3E7, #9FABB7);
+  padding: 20px 35px;
 }
 
 ul {
