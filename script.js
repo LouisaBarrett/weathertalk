@@ -7,11 +7,11 @@ checkWeatherBtn.addEventListener('click', event => {
   getData(cityNameInput.value);
 });
 
-function updateCity(city) {
+let updateCity = (city) => {
   return `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=f2e53f539786e6ab3e9318da74a9bc35`;
 };
 
-function getData(cityName) {
+let getData = (cityName) => {
   const weatherData = updateCity(cityName)
   fetch(weatherData)
   .then(response => response.json())
