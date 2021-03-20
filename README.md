@@ -89,11 +89,57 @@ This API response confirms that our API key is working, and now we can pull it i
 
 We'll be building a small application that helps start conversations with your colleagues on who live in different cities. When you don't know what to talk about, talk about the weather!
 
-> Note: You can clone down this repo to run the example project locally on your machine. Because it is a simple static application, there are no required dependencies -- you should be able to clone and go!
+> Note: You can clone down this repo to run the example project locally on your machine. Because it is a simple static application, there are no required dependencies (but remember to use your own API key) -- you should be able to clone and go!
 
 ![Homepage](assets/images/weathertalk-01.png)
 ![Homepage, entering city name](assets/images/weathertalk-02.png)
 ![Homepage, showing city weather info](assets/images/weathertalk-03.png)
+
+To work along, you'll need to create HTML, CSS, and JavaScript files. Go ahead and add the following HTML to your `index.html` file:
+
+```HTML
+<!DOCTYPE html>
+<head>
+  <title>WeatherTalk</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>WeatherTalk</h1>
+  <ul class="weather-data"></ul>
+  <script type="text/javascript" src="script.js"></script>
+</body>
+```
+
+#### Rolling your own
+
+As a first step, start by making a call to API and rendering the response in the DOM. We'll be using JavaScript's [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) to make this API request. The Fetch API provides us an interface to, well, fetch resources across a network using HTTP. We'll be using the global `fetch()` method to allow us to make our API calls. We will be using a basic fetch request for our app, which looks like this:
+
+```javascript
+fetch('http://example.com/sample.json')
+  .then(response => response.json())
+  .then(data => console.log(data));
+```
+
+We can see that the `fetch()` method takes an argument of the path to the resource you would like to fetch, and then returns a promise which contains the response. Let's try it with the url we defined above.
+
+In your JavaScript file, write the following function:
+
+```javascript
+let fetchData = () => {
+  fetch('https://api.openweathermap.org/data/2.5/weather?q=Denver&appid=f2e53f539786e6ab3e9318da74a9bc35')
+  .then(response => response.json())
+  .then(data => console.log(data));
+}
+
+fetchData()
+```
+
+**Note that you must include http or https in the url, or you will be met with an error message.**
+
+Open your HTML file in your browser and take a look at the console to see what was logged there.
+
+
 
 
 <!-- #### Guided Practice (We do)
