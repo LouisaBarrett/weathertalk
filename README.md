@@ -87,6 +87,15 @@ This API response confirms that our API key is working, and now we can pull it i
 
 ### The Project: Weather Talk
 
+We'll be building a small application that helps start conversations with your colleagues on who live in different cities. When you don't know what to talk about, talk about the weather!
+
+> Note: You can clone down this repo to run the example project locally on your machine. Because it is a simple static application, there are no required dependencies -- you should be able to clone and go!
+
+![Homepage](assets/images/weathertalk-01.png)
+![Homepage, entering city name](assets/images/weathertalk-02.png)
+![Homepage, showing city weather info](assets/images/weathertalk-03.png)
+
+
 <!-- #### Guided Practice (We do)
 * Writer and reader both "doing" -->
 
