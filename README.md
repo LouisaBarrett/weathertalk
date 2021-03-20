@@ -2,7 +2,7 @@
 
 <!-- outline / structure notes -->
 
-#### Goals
+### Goals
 
 By the end of this tutorial, you will be familiar with:
 
@@ -10,11 +10,13 @@ By the end of this tutorial, you will be familiar with:
 * Incorporating the Open Weather Map API in your own sample project
 * The capabilities of the Open Weather API
 
-In this tutorial, we'll be using one of OpenWeatherMap's free APIs. The OpenWeatherMap API collection provides robust and easy-to-use weather data through a public API. With both free and subscription services, this tool provides developers access to a vast set data that is straightforward to incorporate into projects. From simple weather status results to complex data visualizations, OpenWeatherMap has an API that can handle whatever creative endeavors you may have in mind.
+### Overview
+
+In this tutorial, we'll be using one of OpenWeather's free APIs. The OpenWeather API collection provides robust and easy-to-use weather data through a public API. With both free and subscription services, this tool provides developers access to a vast set data that is straightforward to incorporate into projects. From simple weather status results to complex data visualizations, OpenWeather has an API that can handle whatever creative endeavors you may have in mind.
 
 Today, we'll build a locally-running small static site using vanilla JavaScript, HMTL, and CSS that displays city-specific weather data from the **OpenWeather Current Weather Data API**. By keeping the structure we're working within foundational, we can focus on the API as we become familiar with it rather than any framework-specific nuances. The concepts and approaches used in this basic application can be translated into the framework of your choice as you tackle larger, more complex projects leveraging OpenWeather APIs.
 
-#### Getting started
+### Getting started
 
 Getting up and running with the OpenWeather suite of APIs is user friendly. Navigate over to [OpenWeather Current and Forecast weather data collection](https://openweathermap.org/api), where you'll see all the API offerings available through OpenWeather. Each individual API has a brief overview on this page, as well as `API doc` and `Subscribe` buttons where you'll find documentation and be able to sign up to receive a unique API key for that particular data collection.
 
@@ -84,7 +86,7 @@ When we run this in the browser, we'll see the API response in the form of a JSO
 
 This API response confirms that our API key is working, and now we can pull it into our application.
 
-#### The Project: Weather Talk
+### The Project: Weather Talk
 
 <!-- #### Guided Practice (We do)
 * Writer and reader both "doing" -->
