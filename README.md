@@ -50,37 +50,36 @@ When we run this in the browser, we'll see the API response in the form of a JSO
       "icon": "02d"
     }
   ],
-
-    "base": "stations",
-    "main": {
-      "temp": 291.85,
-      "feels_like": 286.83,
-      "temp_min": 289.26,
-      "temp_max": 293.15,
-      "pressure": 1007,
-      "humidity": 12
-    },
-    "visibility": 10000,
-    "wind": {
-      "speed": 2.68,
-      "deg": 155,
-      "gust": 7.6
-    },
-    "clouds": {
-      "all": 23
-    },
-    "dt": 1616265830,
-    "sys": {
-      "type": 3,
-      "id": 2004334,
-      "country": "US",
-      "sunrise": 1616245370,
-      "sunset": 1616289103
-    },
-    "timezone": -21600,
-    "id": 5419384,
-    "name": "Denver",
-    "cod": 200
+  "base": "stations",
+  "main": {
+    "temp": 291.85,
+    "feels_like": 286.83,
+    "temp_min": 289.26,
+    "temp_max": 293.15,
+    "pressure": 1007,
+    "humidity": 12
+  },
+  "visibility": 10000,
+  "wind": {
+    "speed": 2.68,
+    "deg": 155,
+    "gust": 7.6
+  },
+  "clouds": {
+    "all": 23
+  },
+  "dt": 1616265830,
+  "sys": {
+    "type": 3,
+    "id": 2004334,
+    "country": "US",
+    "sunrise": 1616245370,
+    "sunset": 1616289103
+  },
+  "timezone": -21600,
+  "id": 5419384,
+  "name": "Denver",
+  "cod": 200
 }
 ```
 
