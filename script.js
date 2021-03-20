@@ -17,7 +17,7 @@ function getData(cityName) {
   .then(response => response.json())
   .then(data => {
     const cityNameDisplay = document.querySelector("#city-name-js");
-    cityNameDisplay.innerHTML = "Here's what the weather looks like today in " + data.name;
+    cityNameDisplay.innerHTML = "Here's what the weather looks<br> like today in " + data.name;
     const string = `<li> Current Temperature: <strong>${Math.floor(data.main.temp)}</strong> </li>
                     <li> Low Temperature: <strong>${Math.floor(data.main.temp_min)}</strong> </li>
                     <li> High Temperature: <strong>${Math.floor(data.main.temp_max)}</strong> </li>
