@@ -60,6 +60,19 @@ section {
   padding: 35px;
 }
 
+/* classes for backgroundColorUpdate function */
+.hot-temp-bg {
+  background: linear-gradient(to bottom right, #dfe3e7, #FF6C4D);
+}
+
+.mid-temp-bg {
+  background: linear-gradient(to bottom right, #dfe3e7, #FFCB20);
+}
+.cool-temp-bg {
+  background: linear-gradient(to bottom right, #dfe3e7, #98FDD9);
+}
+/* end classes for backgroundColorUpdate function */
+
 ul {
   list-style: none;
   display: grid;
