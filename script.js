@@ -28,11 +28,11 @@ const generateHTML = (data) => {
 
 const phraseGenerator = (data) => {
   if (data.main.temp >= "70") {
-    return `Be sure to pack your sunscreen!`
+    return 'Be sure to pack your sunscreen!'
   } else if (data.main.temp <= "30") {
-    return `I bet you're craving a pumpkin spice latte right now!`
+    return 'I bet you\'re craving a pumpkin spice latte right now!'
   } else {
-    return `All you need is a light sweater!`
+    return 'All you need is a light sweater!'
   }
 }
 
