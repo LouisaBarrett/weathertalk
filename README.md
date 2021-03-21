@@ -288,11 +288,9 @@ This gives us basic functionality using data returned from the OpenWeather Curre
 
 ### UI Refinement
 
-Now that we have our basic functionality, let's tighten up the user experience and do some work that leverages the API data in a less direct way.  We'll add the following:
+Now that we have our basic functionality, let's tighten up the user experience. We'll add the following:
 
 * Layout and copy (another word for the text content) refinement that clarifies what the data being displayed means for the user
-* A "conversation prompt" section that gives topic suggestions based on the daily temperature of the specified city
-* The ability to change the color of the background on the main section of our page based on the current conditions of the specified city
 
 #### Layout Refinement
 
@@ -416,6 +414,11 @@ const fetchData = (city) => {
 ### Additional Functionality
 
 Let's push a little further into ways the data returned from the API could be used. Right now we've made a very direct translation from response data to what the user is seeing. We'll build out two simple, slightly less direct ways we can use the temperature date we've become familiar with to get your wheels spinning for even more ways to experiment with the OpenWeather API.
+
+We'll add the following:
+
+* A "conversation prompt" section that gives topic suggestions based on the daily temperature of the specified city
+* The ability to change the color of the background on the main section of our page based on the current conditions of the specified city
 
 #### Conversation Prompts
 
