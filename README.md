@@ -181,20 +181,57 @@ let fetchData = () => {
 fetchData()
 ```
 
-Refresh `index.html` in your browser, and you should see your specified cities data being rendered!
+Refresh `index.html` in your browser, and you should see your specified cities data being rendered.
+
+<!-- NOTE FOR LOUISA: include a blurb about how to specify the temperature type in the url "Why does this look weird? let's fix it" sort of thing -->
 
 ### Forms and User Generated Data
 
-The main purpose of our WeatherTalk app is to help remote coworkers make small talk about the weather in their respective cities. Right now our application doesn't allow for much flexibility in changing what city's weather is being displayed. 
+The main purpose of our WeatherTalk app is to help remote coworkers make small talk about the weather in their respective cities. Right now our application doesn't allow for much flexibility in changing what city's weather is being displayed. Adding a form for a user to input the city name that the weather results are based on would make this more useful.
 
-<!-- #### Guided Practice (We do)
-* Writer and reader both "doing" -->
+Let's add a form input and submit for our users to our HTML file:
 
+```HTML
+<form>
+  <label for="city">Enter City Name</label>
+  <input id="city" type="text" value="">
+  <input type="submit" id="city-btn-js" value="Check The Weather">
+</form>
+```
 
-<!-- #### Independent/Pair Practice (You do)
-* Reader "doing", writer providing guidance
-* Examples: questions in a Gist, implementing feature -->
+Now we'll add an event lister in our JavaScript file to listen for click events on the submit button we've created as well as variables so we can target the input and the submit. Our event our event lister and the associated variables will look like this:
 
+```javascript
+const submitBtn = document.querySelector('#city-btn-js');
+const nameInput = document.querySelector('#city')
+
+submitBtn.addEventListener('click', event => {
+  event.preventDefault();
+  fetchData(nameInput.value);
+})
+```
+
+> Tip: Notice that we've moved the function call for `fetchData()` inside our event listener so it isn't run until the user intentionally submits the name of a city. Make sure to check that you don't have a duplicate function call outside of the event listener!
+
+There is some refactoring to do within the `fetchData()` function to allow it to utilize this user generated input. We'll need to pass in a parameter that we can then embed within the url for the API call. Let's take a look:
+
+```javascript
+let fetchData = (cityName) => {
+  fetch(`http://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=24cb4f10832665acc322df8262f98241`)
+  .then(response => response.json())
+  .then(data => {
+   weatherList.innerHTML = `<li>${data.name}<li>
+                            <li>${data.main.temp}<li>
+                            <li>${data.main.temp_min}<li>
+                            <li>${data.main.temp_max}<li>
+                            <li>${data.weather[0].description}<li>`
+ });
+}
+```
+
+Reload your page in the browser and give it a try. You should see that the hard coded list of city-specific weather information is gone, and we now only see the form. When a city's name is entered into the input field and submitted, you should see the weather data populated with information for the user-specified city.
+
+And with that, we have our MVP functionality using data returned from the OpenWeather Current Weather Data API.
 
 <!-- ### Possible questions and/or misunderstandings
 * What concepts might be misunderstand, and why? -->
