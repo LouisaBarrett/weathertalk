@@ -294,6 +294,8 @@ Now that we have our basic functionality, let's tighten up the user experience a
 * A "conversation prompt" section that gives topic suggestions based on the daily temperature of the specified city
 * The ability to change the color of the background on the main section of our page based on the current conditions of the specified city
 
+#### Layout Refinement
+
 Let's tidy up our UI and make it a bit more appealing to users and a bit less "HTML from the '90s." It would be nice to move the `H1` to a `header` and the form to an `aside` so we can more space for the primary content that we're pulling from the API. We also could use some copy to help clarify what we're looking at.
 
 Let's add a custom font into our `head` tag:
@@ -343,6 +345,8 @@ What the app looks like in the browser hasn't changed significantly, but we've s
 
 Reload the page, and you should see a clearly defined header, side bar, and primary content section on your page.
 
+#### Adding Text for Better Usability
+
 Now that our content is better structured, let's update the copy to make it more clear for the user. We'll start with the text shown when the page initially loads before we specify a city. Let's work on the an `H2` with the id of `city-name-js`.
 
 It's acting as a content title, so let's update it after a user has submitted a city name from:
@@ -376,6 +380,8 @@ weatherList.innerHTML = `<li> Current Temperature: <strong>${Math.floor(data.mai
 ```
 
 Now a user will be able to easily understand what the meaning of the values being rendered in the DOM.
+
+#### Javascript Refactor
 
 Our `fetchData()` function is a bit bloated, so let's do a quick refactor to pull out the generated HMTL into their own functions that we can then call in `fetchData()`. While not required, it will allow to keep our code single responsibility and tidy with the bonus of making the addition of new functionality easier down the road.
 
