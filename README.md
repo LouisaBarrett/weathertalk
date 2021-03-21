@@ -535,6 +535,19 @@ const fetchData = (city) => {
   })
 }
 ```
+Let's take a look at the final UI results.
+
+Here's our landing page UI again
+![Homepage](assets/images/weathertalk-01.png)
+
+UI when the specified city's weather is moderate.
+![Homepage](assets/images/weathertalk-04.png)
+
+UI when the specified city's weather is cold.
+![Homepage](assets/images/weathertalk-05.png)
+
+UI when the specified city's weather is warm.
+![Homepage](assets/images/weathertalk-06.png)
 
 And with that, we've completed the functionality and UI refinement that will be covered in this tutorial! There are so many more exciting projects that can be done using the OpenWeather API suite, what we built today is just the tip of the iceberg.
 
