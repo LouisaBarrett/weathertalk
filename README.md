@@ -411,9 +411,58 @@ const fetchData = (city) => {
 }
 ```
 
-<!-- NOTE FOR LOUISA: Add "Conversation Prompts" based on temp ranges -->
+#### Additional Functionality
 
+Let's push a little further into ways the data returned from the API could be used. Right now we've made a very direct translation from response data to what the user is seeing. We'll build out two simple, slightly less direct ways we can use the temperature date we've become familiar with to get your wheels spinning for even more ways to experiment with the OpenWeather API.
 
+##### Conversation Prompts
+
+Our WeatherTalk app could really use some conversation starter phrases based on the current temperature of the specified city. Let's take a crack at it!
+
+First, let's create an element in our HTML under our `ul` where we can append this new content, and give it an id of `#phrase-helper-js`:
+
+```HTML
+<h4 id="phrase-helper-js"></h4>
+```
+
+In keeping with the patterns we've established in our code, we'll want to make a helper function to handle this work and create a global variable that allows us to target the HTML element. We'll call the function `phraseGenerator` and have it take a parameter, and the variable will be `phraseHelper`.
+
+```javascript
+const phraseHelper = document.querySelector('#phrase-helper-js')
+
+const phraseGenerator = (data) => {
+
+}
+```
+
+Now, we'll add a. `if` statement to return a different statement based on the current temperature of the specified city.
+
+```javascript
+const phraseHelper = document.querySelector('#phrase-helper-js')
+
+const phraseGenerator = (data) => {
+  if (data.main.temp >= "70") {
+    // hot temperature phrase
+    return `Be sure to pack your sunscreen!`
+  } else if (data.main.temp <= "30") {
+    // cold temperature phrase
+    return `I bet you're craving a pumpkin spice latte right now!`
+  } else {
+    // mid temperature phrase
+    return `All you need is a light sweater!`
+  }  
+}
+```
+
+We'll call this function in `fetchData()` just as we've called `generateTitle()` and `generateHTML()`, updating the `innerHTML` of our `phraseHelper` element and passing `data` in as the argument. The line of code will look like this:
+
+```JavaScript
+phraseHelper.innerHTML = phraseGenerator(data)
+```
+
+Now refresh your page and submit a city name. You should see your phrase appear!
+
+<!-- ##### Dynamic Background Color -->
 <!-- NOTE FOR LOUISA: Add "Background Update" based on temp ranges  -->
 
 ---
