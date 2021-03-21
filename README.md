@@ -478,7 +478,7 @@ const backgroundColorUpdate = () => {
 }
 ```
 
-Now let's add our functionality. We can use the same `if` statmeent structure that we used for our phrase generator, this way the color changes will align with the phases changing.
+Now let's add our functionality. We can use the same `if` statement structure that we used for our phrase generator, this way the color changes will align with the phrases changing.
 
 ```javascript
 const mainSection = document.querySelector('section')
