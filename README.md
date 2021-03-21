@@ -27,13 +27,13 @@ Click the `Subscribe` button under **Current Weather Data**, and you'll be direc
 Once you have your key, you can try it out by entering the following API call in your browser.
 
 ```
-api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}
+api.openweathermap.org/data/2.5/weather?q={city name}&units=imperial&appid={API key}
 ```
 
-If we break this down, we'll see two sets of curly braces: `{city name}` and `{API key}`. The content within these braces indicates the content you should update. Enter the name of a city you'd like to see weather data for as well our unique API key. An example of the completed url is:
+If we break this down, we'll see two sets of curly braces: `{city name}` and `{API key}`. The content within these braces indicates the content you should update. Enter the name of a city you'd like to see weather data for as well our unique API key. `units=imperial` indicates that we want our temperature to be shown in Fahrenheit. An example of the completed url is:
 
 ```
-api.openweathermap.org/data/2.5/weather?q=Denver&appid=f2e53f539786e6ab3e9318da74a9bc35
+api.openweathermap.org/data/2.5/weather?q=Denver&units=imperial&appid=f2e53f539786e6ab3e9318da74a9bc35
 ```
 
 When we run this in the browser, we'll see the API response in the form of a JSON object. Take a moment and read through this to familiarize yourself with it -- these are all the values we can leverage as we begin to work with this API in our project. It should look something like this:
@@ -145,7 +145,7 @@ In your JavaScript file, write the following function:
 
 ```javascript
 const fetchData = () => {
-  fetch('https://api.openweathermap.org/data/2.5/weather?q=Denver&appid=f2e53f539786e6ab3e9318da74a9bc35')
+  fetch('https://api.openweathermap.org/data/2.5/weather?q=Denver&units=imperial&appid=f2e53f539786e6ab3e9318da74a9bc35')
   .then(response => response.json())
   .then(data => console.log(data))
 }
@@ -154,6 +154,25 @@ fetchData()
 ```
 
 > Tip: You must include http or https in the url you pass in as the argument here, or you will be met with a [CORS](https://developer.mozilla.org/en-US/docs/Glossary/CORS) error message.
+
+To do a bit of future planning in our code, let's go ahead with a quick refactor to pull our unique API key into a global variable and the API url out into it's own function that we can then use within our `fetchData()` function. Our refactored code will look like this:
+
+```javascript
+const API_KEY = 'f2e53f539786e6ab3e9318da74a9bc35' // Replace this key with your own unique API key
+
+const updateCity = () => {
+  return `http://api.openweathermap.org/data/2.5/weather?q=Denver&units=imperial&appid=${API_KEY}`
+}
+
+const fetchData = (city) => {
+  fetch(updateCity(city))
+  .then(response => response.json())
+  .then(data => console.log(data))
+}
+
+fetchData()
+```
+
 
 Open your HTML file in your browser and take a look at the console to see what was logged there. You should see the same JSON object that we saw when we ran that url directly in the browser -- success! Now we can render this current weather data in the DOM.
 
@@ -179,9 +198,14 @@ Here's what the updated function will look like:
 
 ```JavaScript
 const weatherList = document.querySelector(".weather-list")
+const API_KEY = 'f2e53f539786e6ab3e9318da74a9bc35' // Replace this key with your own unique API key
 
-const fetchData = () => {
-  fetch('https://api.openweathermap.org/data/2.5/weather?q=Denver&appid=f2e53f539786e6ab3e9318da74a9bc35')
+const updateCity = () => {
+  return `http://api.openweathermap.org/data/2.5/weather?q=Denver&units=imperial&appid=${API_KEY}`
+}
+
+const fetchData = (city) => {
+  fetch(updateCity(city))
   .then(response => response.json())
   .then(data => {
     weatherList.innerHTML = `<li>${data.name}<li>
@@ -227,11 +251,15 @@ submitBtn.addEventListener('click', event => {
 
 > Tip: Notice that we've moved the function call for `fetchData()` inside our event listener so it isn't run until the user intentionally submits the name of a city. Make sure to check that you don't have a duplicate function call outside of the event listener!
 
-There is some refactoring to do within the `fetchData()` function to allow it to utilize this user generated input. We'll need to pass in a parameter that we can then embed within the url for the API call and then we will want to clear out the value of the input after we've rendered the list items. Let's take a look:
+There is some refactoring to do within the `updateCity()` function to allow it to utilize this user generated input. We'll need to pass in a parameter that we can then embed within the url for the API call and then we will want to clear out the value of the input after we've rendered the list items. Let's take a look:
 
 ```javascript
-const fetchData = (cityName) => {
-  fetch(`http://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=24cb4f10832665acc322df8262f98241`)
+const updateCity = (city) => {
+  return `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${API_KEY}`
+}
+
+const fetchData = (city) => {
+  fetch(updateCity(city))
   .then(response => response.json())
   .then(data => {
    weatherList.innerHTML = `<li>${data.name}<li>
