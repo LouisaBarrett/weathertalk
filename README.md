@@ -546,5 +546,13 @@ It's worth noting that it is not best practice to share an API key publicly as w
 
 ---
 
-### Outside Resources / Further Reading
-* [FPO link to outside resource and references]()
+### Resource and References
+
+Links to resources used in the creation of this tutorial.
+
+* [Using a Public API for beginners](https://www.youtube.com/watch?v=InoAIgBZIEA)
+* [Getting started with OWM](https://openweathermap.org/appid#example)
+* [OWM current weather data](https://openweathermap.org/current)
+* [Fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch)
+* [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
+* [Switching between temperature units OWM](https://openweathermap.force.com/s/article/switching-between-temperature-units-2019-10-24-21-47-24)
