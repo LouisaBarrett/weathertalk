@@ -132,7 +132,9 @@ Once you've created you working files, go ahead and add the following HTML to yo
 </body>
 ```
 
-#### Fetching The Weather Data
+---
+
+### Fetching The Weather Data
 
 As a first step, start by making a call to the API and rendering the response in the DOM. We'll be using the [`fetch()` method](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch) to allow us to make our API calls. This is part of JavaScript's [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API). The Fetch API provides us an interface to, well, fetch resources across a network using HTTP. We will be using a basic fetch request for our app, which looks like this:
 
@@ -180,7 +182,9 @@ fetchData()
 
 Open your HTML file in your browser and take a look at the console to see what was logged there. You should see the same JSON object that we saw when we ran that url directly in the browser -- success! Now we can render this current weather data in the DOM.
 
-#### Connecting the Data to the DOM
+---
+
+### Connecting the Data to the DOM
 
 We'll need something in our HTML to use as a hook for our JavaScript, so let's add an unordered list with a class of "weather-list" to the body of `index.html`. It should look like this:
 
@@ -225,7 +229,7 @@ fetchData()
 
 Refresh `index.html` in your browser, and you should see your specified cities data being rendered.
 
-<!-- NOTE FOR LOUISA: include a blurb about how to specify the temperature type in the url "Why does this look weird? let's fix it" sort of thing -->
+---
 
 ### Forms and User Generated Data
 
@@ -280,7 +284,9 @@ Reload your page in the browser and give it a try. You should see that the hard 
 
 This gives us basic functionality using data returned from the OpenWeather Current Weather Data API. Now we a foundation ready to play around with the API, and we'll take a look at a couple of fun addition functionality and UI details to help sprout ideas about new ways to utilize OpenWeather APIs in future projects.
 
-#### UI Refinement and Additional Functionality
+---
+
+### UI Refinement and Additional Functionality
 
 Now that we have our basic functionality, let's tighten up the user experience and do some work that leverages the API data in a less direct way.  We'll add the following:
 
@@ -288,7 +294,6 @@ Now that we have our basic functionality, let's tighten up the user experience a
 * A "conversation prompt" section that gives topic suggestions based on the daily temperature of the specified city
 * The ability to change the color of the background on the main section of our page based on the current conditions of the specified city
 
-<!-- NOTE FOR LOUISA: UI update with aside and the prompts on the left section -->
 Let's tidy up our UI and make it a bit more appealing to users and a bit less "HTML from the '90s." It would be nice to move the `H1` to a `header` and the form to an `aside` so we can more space for the primary content that we're pulling from the API. We also could use some copy to help clarify what we're looking at.
 
 Let's add a custom font into our `head` tag:
@@ -405,11 +410,13 @@ const fetchData = (city) => {
 
 <!-- NOTE FOR LOUISA: Add "Background Update" based on temp ranges  -->
 
+---
 
-#### Next Steps
+### Next Steps
 
 It's worth noting that it is not best practice to share an API key publicly as we've done in this tutorial -- we can get away with it while working locally and experimenting with how to play with data, but if this were a live site doing so would present security risks. This type of private data is typically found in a project's server-side code, which our small site does not have. If you're interested in making a static site like this live on a hosting platform such as GitHub Pages, take a look at a tool like Firebase. If this is something you're interested in exploring, [this blog post](https://medium.com/pan-labs/dynamic-web-apps-on-github-pages-for-free-ffac2b776d45) can point you in the right direction.
 
+---
 
 ### Outside Resources / Further Reading
 * [FPO link to outside resource and references]()
