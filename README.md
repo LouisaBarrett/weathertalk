@@ -16,6 +16,8 @@ In this tutorial, we'll be using one of OpenWeather's free APIs. The OpenWeather
 
 Today, we'll build a locally-running small static site using vanilla JavaScript, HMTL, and CSS that displays city-specific weather data from the **OpenWeather Current Weather Data API**. By keeping the structure we're working within foundational, we can focus on the API as we become familiar with it rather than any framework-specific nuances. The concepts and approaches used in this basic application can be translated into the framework of your choice as you tackle larger, more complex projects leveraging OpenWeather APIs.
 
+---
+
 ### Getting started
 
 Getting up and running with the OpenWeather suite of APIs is user friendly. Navigate over to [OpenWeather Current and Forecast weather data collection](https://openweathermap.org/api), where you'll see all the API offerings available through OpenWeather. Each individual API has a brief overview on this page, as well as `API doc` and `Subscribe` buttons where you'll find documentation and be able to sign up to receive a unique API key for that particular data collection.
@@ -34,9 +36,9 @@ If we break this down, we'll see two sets of curly braces: `{city name}` and `{A
 api.openweathermap.org/data/2.5/weather?q=Denver&appid=f2e53f539786e6ab3e9318da74a9bc35
 ```
 
-When we run this in the browser, we'll see the API response in the form of a JSON object. Take a moment and read through this to familiarize yourself with it -- these are all the values we can leverage as we begin to work with this API in our project.
+When we run this in the browser, we'll see the API response in the form of a JSON object. Take a moment and read through this to familiarize yourself with it -- these are all the values we can leverage as we begin to work with this API in our project. It should look something like this:
 
-```
+```json
 {
   "coord": {
     "lon": -104.9847,
@@ -83,7 +85,9 @@ When we run this in the browser, we'll see the API response in the form of a JSO
 }
 ```
 
-This API response confirms that our API key is working, and now we can pull it into our application.
+This API response confirms that our API key is working, and now we can pull the data being returned into our application.
+
+---
 
 ### The Project: Weather Talk
 
@@ -111,9 +115,9 @@ To work along, you'll need to create HTML, CSS, and JavaScript files. Go ahead a
 </body>
 ```
 
-#### Rolling your own
+#### Fetching The Weather Data
 
-As a first step, start by making a call to API and rendering the response in the DOM. We'll be using JavaScript's [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) to make this API request. The Fetch API provides us an interface to, well, fetch resources across a network using HTTP. We'll be using the global `fetch()` method to allow us to make our API calls. We will be using a basic fetch request for our app, which looks like this:
+As a first step, start by making a call to API and rendering the response in the DOM. We'll be using the [`fetch()` method](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch) to allow us to make our API calls. This is part of JavaScript's [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API). The Fetch API provides us an interface to, well, fetch resources across a network using HTTP. We will be using a basic fetch request for our app, which looks like this:
 
 ```javascript
 fetch('http://example.com/sample.json')
@@ -121,7 +125,7 @@ fetch('http://example.com/sample.json')
   .then(data => console.log(data));
 ```
 
-We can see that the `fetch()` method takes an argument of the path to the resource you would like to fetch, and then returns a promise which contains the response. Let's try it with the url we defined above.
+We can see that the `fetch()` method takes an argument of the path to the resource you would like to fetch, and then returns a promise which contains the response. This is what is being logged to the console in the last line. In this example, the path to the resource we was to fetch is `http://example.com/sample.json` Let's try it out with the url for the OpenWeather API we defined above using our unique API key.
 
 In your JavaScript file, write the following function:
 
@@ -135,12 +139,53 @@ let fetchData = () => {
 fetchData()
 ```
 
-**Note that you must include http or https in the url, or you will be met with an error message.**
+> Hint: You must include http or https in the url you pass in as the argument here, or you will be met with a [CORS](https://developer.mozilla.org/en-US/docs/Glossary/CORS) error message.
 
-Open your HTML file in your browser and take a look at the console to see what was logged there.
+Open your HTML file in your browser and take a look at the console to see what was logged there. You should see the same JSON object that we saw when we ran that url directly in the browser -- success! Now we can render this current weather data in the DOM.
 
+#### Connecting the Data to the DOM
 
+We'll need something in our HTML to use as a hook for our JavaScript, so let's add an unordered list with a class of "weather-list" to the body of `index.html`. It should look like this:
 
+```HTML
+<ul class="weather-list">
+  <!-- weather data rendered here -->
+</ul>
+```
+
+Back in our JavaScript file, we'll add a global variable that will hold this `ul` for us to use when rendering the data being returned from the API. We'll also update our `fetchData()` function to replace the `console.log()` with functional code to add an `li` within our `weatherList` unordered list using template literal syntax.
+
+We'd like to render the city name, information about the current temperature, and a description of the weather from the city that we've specified in the url that we're using to fetch the data.
+
+There are three keys in the JSON object that we'll need to get values from: `main`, `name`, and `weather`. Take another look at the JSON object that we're getting back from this API call to see how to target the specific values we want to render. Using the `innerHTML` property, update the `fetchData()` function to add list items with this content to the `weatherList` unordered list.
+
+> Hint: Pay attention to the data types of the values assigned to object keys. We can see that `weather` is assigned an array of objects as a value, so we'll need to use bracket notation to drill down into that, and we'll need to use dot notation pull the desired values from the object assigned as the value to `main`.
+
+Here's what the updated function will look like:
+
+```JavaScript
+const weatherList = document.querySelector(".weather-list");
+
+let fetchData = () => {
+  fetch('https://api.openweathermap.org/data/2.5/weather?q=Denver&appid=f2e53f539786e6ab3e9318da74a9bc35')
+  .then(response => response.json())
+  .then(data => {
+    weatherList.innerHTML = `<li>${data.name}<li>
+                             <li>${data.main.temp}<li>
+                             <li>${data.main.temp_min}<li>
+                             <li>${data.main.temp_max}<li>
+                             <li>${data.weather[0].description}<li>`
+  });
+}
+
+fetchData()
+```
+
+Refresh `index.html` in your browser, and you should see your specified cities data being rendered!
+
+### Forms and User Generated Data
+
+The main purpose of our WeatherTalk app is to help remote coworkers make small talk about the weather in their respective cities. Right now our application doesn't allow for much flexibility in changing what city's weather is being displayed. 
 
 <!-- #### Guided Practice (We do)
 * Writer and reader both "doing" -->
@@ -153,6 +198,8 @@ Open your HTML file in your browser and take a look at the console to see what w
 
 <!-- ### Possible questions and/or misunderstandings
 * What concepts might be misunderstand, and why? -->
+
+#### Next Steps
 
 It's worth noting that it is not best practice to share an API key publicly as we've done in this tutorial -- we can get away with it while working locally and experimenting with how to play with data, but if this were a live site doing so would present security risks. This type of private data is typically found in a project's server-side code, which our small site does not have. If you're interested in making a static site like this live on a hosting platform such as GitHub Pages, take a look at a tool like Firebase. If this is something you're interested in exploring, [this blog post](https://medium.com/pan-labs/dynamic-web-apps-on-github-pages-for-free-ffac2b776d45) can point you in the right direction.
 
