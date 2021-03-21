@@ -345,16 +345,16 @@ Reload the page, and you should see a clearly defined header, side bar, and prim
 
 #### Adding Text for Better Usability
 
-Now that our content is better structured, let's update the copy to make it more clear for the user. We'll start with the text shown when the page initially loads before we specify a city. Let's work on the an `H2` with the id of `city-name-js`.
+Now that our content is better structured, let's update the copy to make it more clear for the user. We'll start with the text shown when the page initially loads before we specify a city. Let's work with the `H2` with the id of `city-name-js`.
 
-It's acting as a content title, so let's update it after a user has submitted a city name from:
+It's acting as a content title, so let's update it after a user has submitted a city name.
 
+It will change from:
 ```html
 <h2 id="city-name-js">Let's check the weather!</h2>
 ```
 
-to
-
+to:
 ```html
 <h2 id="city-name-js">Here's what the weather looks like today in Denver</h2>
 ```
