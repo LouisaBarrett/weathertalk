@@ -286,7 +286,7 @@ This gives us basic functionality using data returned from the OpenWeather Curre
 
 ---
 
-### UI Refinement and Additional Functionality
+### UI Refinement
 
 Now that we have our basic functionality, let's tighten up the user experience and do some work that leverages the API data in a less direct way.  We'll add the following:
 
@@ -411,11 +411,13 @@ const fetchData = (city) => {
 }
 ```
 
-#### Additional Functionality
+---
+
+### Additional Functionality
 
 Let's push a little further into ways the data returned from the API could be used. Right now we've made a very direct translation from response data to what the user is seeing. We'll build out two simple, slightly less direct ways we can use the temperature date we've become familiar with to get your wheels spinning for even more ways to experiment with the OpenWeather API.
 
-##### Conversation Prompts
+#### Conversation Prompts
 
 Our WeatherTalk app could really use some conversation starter phrases based on the current temperature of the specified city. Let's take a crack at it!
 
@@ -425,7 +427,7 @@ First, let's create an element in our HTML under our `ul` where we can append th
 <h4 id="phrase-helper-js"></h4>
 ```
 
-In keeping with the patterns we've established in our code, we'll want to make a helper function to handle this work and create a global variable that allows us to target the HTML element. We'll call the function `phraseGenerator` and have it take a parameter, and the variable will be `phraseHelper`.
+In keeping with the patterns we've already established in our codebase, we'll want to make a helper function to handle this work and create a global variable to target the appropriate HTML element. We'll call the function `phraseGenerator` and have it take a parameter, and the variable will be `phraseHelper`.
 
 ```javascript
 const phraseHelper = document.querySelector('#phrase-helper-js')
@@ -435,7 +437,7 @@ const phraseGenerator = (data) => {
 }
 ```
 
-Now, we'll add a. `if` statement to return a different statement based on the current temperature of the specified city.
+Now, we'll add an `if` statement to return a different statement based on the current temperature of the specified city.
 
 ```javascript
 const phraseHelper = document.querySelector('#phrase-helper-js')
@@ -454,15 +456,15 @@ const phraseGenerator = (data) => {
 }
 ```
 
-We'll call this function in `fetchData()` just as we've called `generateTitle()` and `generateHTML()`, updating the `innerHTML` of our `phraseHelper` element and passing `data` in as the argument. The line of code will look like this:
+We'll call this new `phraseGenerator()` function in `fetchData()` just as we've called `generateTitle()` and `generateHTML()`, updating the `innerHTML` of our `phraseHelper` element and passing `data` in as the argument. The line of code that will be added looks like this:
 
 ```JavaScript
 phraseHelper.innerHTML = phraseGenerator(data)
 ```
 
-Now refresh your page and submit a city name. You should see your phrase appear!
+Now refresh your page and submit a city name. You should see your conversation prompt appear!
 
-<!-- ##### Dynamic Background Color -->
+<!-- #### Dynamic Background Color -->
 <!-- NOTE FOR LOUISA: Add "Background Update" based on temp ranges  -->
 
 ---
