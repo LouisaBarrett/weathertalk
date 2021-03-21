@@ -95,11 +95,25 @@ We'll be building a small application that helps start conversations with your c
 
 > Note: You can clone down this repo to run the example project locally on your machine. Because it is a simple static application, there are no required dependencies (but remember to use your own API key) -- you should be able to clone and go!
 
+#### Getting up and running
+
+* In your command line run `git clone https://github.com/LouisaBarrett/weathertalk.git`
+* Navigate to the directory
+* Run `open index.html` from your terminal to run the project locally
+
+We'll be building this simple web app:
+
 ![Homepage](assets/images/weathertalk-01.png)
 ![Homepage, entering city name](assets/images/weathertalk-02.png)
 ![Homepage, showing city weather info](assets/images/weathertalk-03.png)
 
-To work along, you'll need to create HTML, CSS, and JavaScript files. Go ahead and add the following HTML to your `index.html` file:
+To work along, you'll need to create HTML, CSS, and JavaScript files. The files names we'll be using in this tutorial are:
+
+* index.html
+* style.css
+* script.js
+
+Once you've created you working files, go ahead and add the following HTML to your `index.html` file:
 
 ```HTML
 <!DOCTYPE html>
@@ -130,16 +144,16 @@ We can see that the `fetch()` method takes an argument of the path to the resour
 In your JavaScript file, write the following function:
 
 ```javascript
-let fetchData = () => {
+const fetchData = () => {
   fetch('https://api.openweathermap.org/data/2.5/weather?q=Denver&appid=f2e53f539786e6ab3e9318da74a9bc35')
   .then(response => response.json())
-  .then(data => console.log(data));
+  .then(data => console.log(data))
 }
 
 fetchData()
 ```
 
-> Hint: You must include http or https in the url you pass in as the argument here, or you will be met with a [CORS](https://developer.mozilla.org/en-US/docs/Glossary/CORS) error message.
+> Tip: You must include http or https in the url you pass in as the argument here, or you will be met with a [CORS](https://developer.mozilla.org/en-US/docs/Glossary/CORS) error message.
 
 Open your HTML file in your browser and take a look at the console to see what was logged there. You should see the same JSON object that we saw when we ran that url directly in the browser -- success! Now we can render this current weather data in the DOM.
 
@@ -164,9 +178,9 @@ There are three keys in the JSON object that we'll need to get values from: `mai
 Here's what the updated function will look like:
 
 ```JavaScript
-const weatherList = document.querySelector(".weather-list");
+const weatherList = document.querySelector(".weather-list")
 
-let fetchData = () => {
+const fetchData = () => {
   fetch('https://api.openweathermap.org/data/2.5/weather?q=Denver&appid=f2e53f539786e6ab3e9318da74a9bc35')
   .then(response => response.json())
   .then(data => {
@@ -213,10 +227,10 @@ submitBtn.addEventListener('click', event => {
 
 > Tip: Notice that we've moved the function call for `fetchData()` inside our event listener so it isn't run until the user intentionally submits the name of a city. Make sure to check that you don't have a duplicate function call outside of the event listener!
 
-There is some refactoring to do within the `fetchData()` function to allow it to utilize this user generated input. We'll need to pass in a parameter that we can then embed within the url for the API call. Let's take a look:
+There is some refactoring to do within the `fetchData()` function to allow it to utilize this user generated input. We'll need to pass in a parameter that we can then embed within the url for the API call and then we will want to clear out the value of the input after we've rendered the list items. Let's take a look:
 
 ```javascript
-let fetchData = (cityName) => {
+const fetchData = (cityName) => {
   fetch(`http://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=24cb4f10832665acc322df8262f98241`)
   .then(response => response.json())
   .then(data => {
@@ -225,6 +239,7 @@ let fetchData = (cityName) => {
                             <li>${data.main.temp_min}<li>
                             <li>${data.main.temp_max}<li>
                             <li>${data.weather[0].description}<li>`
+  nameInput.value = ""
  });
 }
 ```
@@ -235,10 +250,16 @@ This gives us basic functionality using data returned from the OpenWeather Curre
 
 #### UI Refinement and Additional Functionality
 
+Now that we have our basic functionality, let's tighten up the user experience and do some work that leverages the API data in a less direct way.  We'll add the following:
+
+* Layout and copy (another word for the text content) refinement that clarifies what the data being displayed means for the user
+* A "conversation prompt" section that gives topic suggestions based on the daily temperature of the specified city
+* The ability to change the color of the background on the main section of our page based on the current conditions of the specified city
+
 <!-- NOTE FOR LOUISA: UI update with aside and the prompts on the left section -->
 Let's tidy up our UI and make it a bit more appealing to users and a bit less "HTML from the '90s." It would be nice to move the `H1` to a `header` and the form to an `aside` so we can more space for the primary content that we're pulling from the API. We also could use some copy to help clarify what we're looking at.
 
-It'd be nice to use a custom font, so we'll pull that into our `head` tag:
+Let's add a custom font into our `head` tag:
 
 ```html
 <head>
@@ -281,11 +302,47 @@ Now we'll begin the layout and structural updates to our HTML:
 </body>
 ```
 
-What the app looks like in the browser hasn't changed significantly, but we've set ourselves up to do some work in our CSS to make the layout look a little nicer. It's pretty lightweight, but we're just going to make our app look a bit more intentional. Head over to the CSS from [the style.css file in this repo](https://github.com/LouisaBarrett/weathertalk/blob/main/style.css) and it to your own `style.css` file.
+What the app looks like in the browser hasn't changed significantly, but we've set ourselves up to do some work in our CSS to make the layout look a little nicer. It's pretty lightweight, but we're just going to make our app look a bit more intentional. Head over to the CSS from [the style.css file in this repo](https://github.com/LouisaBarrett/weathertalk/blob/main/style.css) and add the contents to your own `style.css` file.
 
 Reload the page, and you should see a clearly defined header, side bar, and primary content section on your page.
 
+Now that our content is better structured, let's update the copy to make it more clear for the user. We'll start with the text shown when the page initially loads before we specify a city. Let's work on the an `H2` with the id of `city-name-js`.
+
+It's acting as a content title, so let's update it after a user has submitted a city name from:
+
+```html
+<h2 id="city-name-js">Let's check the weather!</h2>
+```
+
+to
+
+```html
+<h2 id="city-name-js">Here's what the weather looks like today in Denver</h2>
+```
+
+This change will happen in the JavaScript using the same approach we used to render the weather data as individual `li` elements. We can make these changes in our `fetchData()` function, and we'll' move the dynamically rendered city name from an `li` into our new title.
+
+```JavaScript
+const cityNameDisplay = document.querySelector("#city-name-js")
+cityNameDisplay.innerHTML = `Here's what the weather looks like today in ${data.name}`
+```
+
+Reload the page, and you should see the original message and once a city name is entered you'll see the title change to our city-specific copy.
+
+Next we'll add some clarifying text to the list item content:
+
+```JavaScript
+weatherList.innerHTML = `<li> Current Temperature: <strong>${Math.floor(data.main.temp)}</strong> </li>
+                         <li> Low Temperature: <strong>${Math.floor(data.main.temp_min)}</strong> </li>
+                         <li> High Temperature: <strong>${Math.floor(data.main.temp_max)}</strong> </li>
+                         <li> ${data.weather[0].description} </li>`;
+```
+
+Now the content
+
 <!-- NOTE FOR LOUISA: Add "Conversation Prompts" based on temp ranges -->
+
+
 <!-- NOTE FOR LOUISA: Add "Background Update" based on temp ranges  -->
 
 
