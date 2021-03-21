@@ -173,6 +173,7 @@ const fetchData = (city) => {
 fetchData()
 ```
 
+> Note: It is not best practice to share an API key publicly as we've done in this tutorial -- we can get away with it while working locally, but if this were a site in production doing so would present security risks. This type of private data is typically found in a project's server-side code, which our small site does not have. Separating this information out into a discrete variable and function would allow us to more easily move this code to the backend if we were to expand the scope of this project in the future.
 
 Open your HTML file in your browser and take a look at the console to see what was logged there. You should see the same JSON object that we saw when we ran that url directly in the browser -- success! Now we can render this current weather data in the DOM.
 
@@ -357,7 +358,7 @@ cityNameDisplay.innerHTML = `Here's what the weather looks like today in ${data.
 
 Reload the page, and you should see the original message and once a city name is entered you'll see the title change to our city-specific copy.
 
-Next we'll add some clarifying text to the list item content:
+Next we'll add some clarifying text to the list item content and make the temperature values a bit nicer using [Math.floor()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/floor) to round down to the nearest integer:
 
 ```JavaScript
 weatherList.innerHTML = `<li> Current Temperature: <strong>${Math.floor(data.main.temp)}</strong> </li>
@@ -366,7 +367,7 @@ weatherList.innerHTML = `<li> Current Temperature: <strong>${Math.floor(data.mai
                          <li> ${data.weather[0].description} </li>`;
 ```
 
-Now the content
+Now a user will be able to easily understand what the values we are returning to them mean!
 
 <!-- NOTE FOR LOUISA: Add "Conversation Prompts" based on temp ranges -->
 
