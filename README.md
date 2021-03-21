@@ -164,8 +164,8 @@ const updateCity = () => {
   return `http://api.openweathermap.org/data/2.5/weather?q=Denver&units=imperial&appid=${API_KEY}`
 }
 
-const fetchData = (city) => {
-  fetch(updateCity(city))
+const fetchData = () => {
+  fetch(updateCity())
   .then(response => response.json())
   .then(data => console.log(data))
 }
@@ -205,8 +205,8 @@ const updateCity = () => {
   return `http://api.openweathermap.org/data/2.5/weather?q=Denver&units=imperial&appid=${API_KEY}`
 }
 
-const fetchData = (city) => {
-  fetch(updateCity(city))
+const fetchData = () => {
+  fetch(updateCity())
   .then(response => response.json())
   .then(data => {
     weatherList.innerHTML = `<li>${data.name}<li>
