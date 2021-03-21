@@ -30,11 +30,13 @@ Once you have your key, you can try it out by entering the following API call in
 api.openweathermap.org/data/2.5/weather?q={city name}&units=imperial&appid={API key}
 ```
 
-If we break this down, we'll see two sets of curly braces: `{city name}` and `{API key}`. The content within these braces indicates the content you should update. Enter the name of a city you'd like to see weather data for as well our unique API key. `units=imperial` indicates that we want our temperature to be shown in Fahrenheit. An example of the completed url is:
+If we break this down, we'll see two sets of curly braces: `{city name}` and `{API key}`. The content within these braces indicates the content you should update. Enter the name of a city you'd like to see weather data for as well your unique API key. `units=imperial` indicates that we want our temperature to be shown in Fahrenheit. An example of the completed url is:
 
 ```
 api.openweathermap.org/data/2.5/weather?q=Denver&units=imperial&appid=f2e53f539786e6ab3e9318da74a9bc35
 ```
+
+> Note: You should replace the API key shown in this example with our own unique API key sent by OpenWeather.
 
 When we run this in the browser, we'll see the API response in the form of a JSON object. Take a moment and read through this to familiarize yourself with it -- these are all the values we can leverage as we begin to work with this API in our project. It should look something like this:
 
