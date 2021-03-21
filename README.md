@@ -111,6 +111,7 @@ To work along, you'll need to create HTML, CSS, and JavaScript files. The files 
 
 * index.html
 * style.css
+* reset.css _(note: we're using a reset file to have a bit more control over our styles)_
 * script.js
 
 Once you've created you working files, go ahead and add the following HTML to your `index.html` file:
@@ -331,7 +332,7 @@ Now we'll begin the layout and structural updates to our HTML:
 </body>
 ```
 
-What the app looks like in the browser hasn't changed significantly, but we've set ourselves up to do some work in our CSS to make the layout look a little nicer. It's pretty lightweight, but we're just going to make our app look a bit more intentional. Head over to the CSS from [the style.css file in this repo](https://github.com/LouisaBarrett/weathertalk/blob/main/style.css) and add the contents to your own `style.css` file.
+What the app looks like in the browser hasn't changed significantly, but we've set ourselves up to do some work in our CSS to make the layout look a little nicer. The styling changes are pretty lightweight, but they will make our app look more intentional. Since CSS isn't the focus of this tutorial, we can use both CSS and Reset files from this repo. Get the code from [the style.css file](https://github.com/LouisaBarrett/weathertalk/blob/main/style.css) and [reset.css file](https://github.com/LouisaBarrett/weathertalk/blob/main/reset.css) to copy and paste the contents to your own project files.
 
 Reload the page, and you should see a clearly defined header, side bar, and primary content section on your page.
 
