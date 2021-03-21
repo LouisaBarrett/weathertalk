@@ -1,8 +1,8 @@
 const weatherList = document.querySelector('.weather-list')
 const submitBtn = document.querySelector('#city-btn-js')
 const nameInput = document.querySelector('#city')
-const cityNameDisplay = document.querySelector("#city-name-js")
-const API_KEY = "f2e53f539786e6ab3e9318da74a9bc35"
+const cityNameDisplay = document.querySelector('#city-name-js')
+const API_KEY = 'f2e53f539786e6ab3e9318da74a9bc35' // Replace this key with your own unique API key
 
 submitBtn.addEventListener('click', event => {
   event.preventDefault()
@@ -24,13 +24,13 @@ const generateHTML = (data) => {
           <li> ${data.weather[0].description} </li>`
 }
 
-const fetchData = (cityName) => {
-  const weatherData = updateCity(cityName)
+const fetchData = (city) => {
+  const weatherData = updateCity(city)
   fetch(weatherData)
   .then(response => response.json())
   .then(data => {
     cityNameDisplay.innerHTML = generateTitle(data)
     weatherList.innerHTML = generateHTML(data)
-    nameInput.value = ""
+    nameInput.value = ''
   })
 }
