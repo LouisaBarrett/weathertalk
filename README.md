@@ -231,7 +231,13 @@ let fetchData = (cityName) => {
 
 Reload your page in the browser and give it a try. You should see that the hard coded list of city-specific weather information is gone, and we now only see the form. When a city's name is entered into the input field and submitted, you should see the weather data populated with information for the user-specified city.
 
-And with that, we have our MVP functionality using data returned from the OpenWeather Current Weather Data API.
+This gives us basic functionality using data returned from the OpenWeather Current Weather Data API. Now we a platform to play around with the API, and we'll take a look at a couple of fun addition functionality and UI details to help sprout some ideas about new ways to utilize OpenWeather APIs.
+
+#### UI Refinement and Additional Functionality
+
+<!-- NOTE FOR LOUISA: UI update with aside and the prompts on the left section -->
+<!-- NOTE FOR LOUISA: Add "Conversation Prompts" based on temp ranges -->
+<!-- NOTE FOR LOUISA: Add "Background Update" based on temp ranges  -->
 
 <!-- ### Possible questions and/or misunderstandings
 * What concepts might be misunderstand, and why? -->
