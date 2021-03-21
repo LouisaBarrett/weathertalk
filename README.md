@@ -131,7 +131,7 @@ Once you've created you working files, go ahead and add the following HTML to yo
 
 #### Fetching The Weather Data
 
-As a first step, start by making a call to API and rendering the response in the DOM. We'll be using the [`fetch()` method](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch) to allow us to make our API calls. This is part of JavaScript's [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API). The Fetch API provides us an interface to, well, fetch resources across a network using HTTP. We will be using a basic fetch request for our app, which looks like this:
+As a first step, start by making a call to the API and rendering the response in the DOM. We'll be using the [`fetch()` method](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch) to allow us to make our API calls. This is part of JavaScript's [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API). The Fetch API provides us an interface to, well, fetch resources across a network using HTTP. We will be using a basic fetch request for our app, which looks like this:
 
 ```javascript
 fetch('http://example.com/sample.json')
@@ -173,7 +173,7 @@ const fetchData = () => {
 fetchData()
 ```
 
-> Note: It is not best practice to share an API key publicly as we've done in this tutorial -- we can get away with it while working locally, but if this were a site in production doing so would present security risks. This type of private data is typically found in a project's server-side code, which our small site does not have. Separating this information out into a discrete variable and function would allow us to more easily move this code to the backend if we were to expand the scope of this project in the future.
+> Note: It is not best practice to share an API key publicly as we are doing in this tutorial -- we can get away with it while working locally, but if this were a site in production doing so would present security risks. This type of private data is typically found in a project's server-side code, which our small site does not have. Separating this information out into a discrete variable and function would allow us to more easily move this code to the backend if we were to expand the scope of this project in the future.
 
 Open your HTML file in your browser and take a look at the console to see what was logged there. You should see the same JSON object that we saw when we ran that url directly in the browser -- success! Now we can render this current weather data in the DOM.
 
@@ -349,7 +349,7 @@ to
 <h2 id="city-name-js">Here's what the weather looks like today in Denver</h2>
 ```
 
-This change will happen in the JavaScript using the same approach we used to render the weather data as individual `li` elements. We can make these changes in our `fetchData()` function, and we'll' move the dynamically rendered city name from an `li` into our new title.
+This change will happen in the JavaScript using the same approach we used to render the weather data as individual `li` elements. We can make these changes in our `fetchData()` function, and we'll move the dynamically rendered city name from an `li` into our new title.
 
 ```JavaScript
 const cityNameDisplay = document.querySelector("#city-name-js")
@@ -367,7 +367,35 @@ weatherList.innerHTML = `<li> Current Temperature: <strong>${Math.floor(data.mai
                          <li> ${data.weather[0].description} </li>`;
 ```
 
-Now a user will be able to easily understand what the values we are returning to them mean!
+Now a user will be able to easily understand what the meaning of the values being rendered in the DOM.
+
+Our `fetchData()` function is a bit bloated, so let's do a quick refactor to pull out the generated HMTL into their own functions that we can then call in `fetchData()`. While not required, it will allow to keep our code single responsibility and tidy with the bonus of making the addition of new functionality easier down the road.
+
+Our refactored `fetchData()` with separated functions to handle the HTML looks like this:
+
+```javascript
+const generateTitle = (data) => {
+  return `Here's what the weather looks<br> like today in ${data.name}`
+}
+
+const generateHTML = (data) => {
+  return `<li> Current Temperature: <strong>${Math.floor(data.main.temp)}</strong> </li>
+          <li> Low Temperature: <strong>${Math.floor(data.main.temp_min)}</strong> </li>
+          <li> High Temperature: <strong>${Math.floor(data.main.temp_max)}</strong> </li>
+          <li> ${data.weather[0].description} </li>`
+}
+
+const fetchData = (city) => {
+  const weatherData = updateCity(city)
+  fetch(weatherData)
+  .then(response => response.json())
+  .then(data => {
+    cityNameDisplay.innerHTML = generateTitle(data)
+    weatherList.innerHTML = generateHTML(data)
+    nameInput.value = ''
+  })
+}
+```
 
 <!-- NOTE FOR LOUISA: Add "Conversation Prompts" based on temp ranges -->
 
