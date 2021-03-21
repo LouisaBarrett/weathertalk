@@ -14,7 +14,7 @@ By the end of this tutorial, you will be familiar with:
 
 In this tutorial, we'll be using one of OpenWeather's free APIs. The OpenWeather API collection provides robust and easy-to-use weather data through a public API. With both free and subscription services, this tool provides developers access to a vast set data that is straightforward to incorporate into projects. From simple weather status results to complex data visualizations, OpenWeather has an API that can handle whatever creative endeavors you may have in mind.
 
-Today, we'll build a locally-running small static site using vanilla JavaScript, HMTL, and CSS that displays city-specific weather data from the **OpenWeather Current Weather Data API**. By keeping the structure we're working within foundational, we can focus on the API as we become familiar with it rather than any framework-specific nuances. The concepts and approaches used in this basic application can be translated into the framework of your choice as you tackle larger, more complex projects leveraging OpenWeather APIs.
+Today, we'll build a locally-running small static site using vanilla JavaScript, HTML, and CSS that displays city-specific weather data from the **OpenWeather Current Weather Data API**. By keeping the structure we're working within foundational, we can focus on the API as we become familiar with it rather than any framework-specific nuances. The concepts and approaches used in this basic application can be translated into the framework of your choice as you tackle larger, more complex projects leveraging OpenWeather APIs.
 
 ---
 
@@ -381,7 +381,7 @@ Now a user will be able to easily understand what the meaning of the values bein
 
 #### Javascript Refactor
 
-Our `fetchData()` function is a bit bloated, so let's do a quick refactor to pull out the generated HMTL into their own functions that we can then call in `fetchData()`. While not required, it will allow to keep our code single responsibility and tidy with the bonus of making the addition of new functionality easier down the road.
+Our `fetchData()` function is a bit bloated, so let's do a quick refactor to pull out the generated HTML into their own functions that we can then call in `fetchData()`. While not required, it will allow to keep our code single responsibility and tidy with the bonus of making the addition of new functionality easier down the road.
 
 Our refactored `fetchData()` with separated functions to handle the HTML looks like this:
 
@@ -413,7 +413,7 @@ const fetchData = (city) => {
 
 ### Additional Functionality
 
-Let's push a little further into ways the data returned from the API could be used. Right now we've made a very direct translation from response data to what the user is seeing. We'll build out two simple, slightly less direct ways we can use the temperature date we've become familiar with to get your wheels spinning for even more ways to experiment with the OpenWeather API.
+Let's push a little further into ways the data returned from the API could be used. Right now we've made a very direct translation from response data to what the user is seeing. We'll build out two simple, slightly less direct ways we can use the temperature data in the UI. Hopefully this will help get your wheels spinning for even more ways to experiment with the OpenWeather API.
 
 We'll add the following:
 
@@ -447,14 +447,11 @@ const phraseHelper = document.querySelector('#phrase-helper-js')
 
 const phraseGenerator = (data) => {
   if (data.main.temp >= "70") {
-    // hot temperature phrase
-    return `Be sure to pack your sunscreen!`
+    return 'Be sure to pack your sunscreen!'
   } else if (data.main.temp <= "30") {
-    // cold temperature phrase
-    return `I bet you're craving a pumpkin spice latte right now!`
+    return 'I bet you\'re craving a pumpkin spice latte right now!'
   } else {
-    // mid temperature phrase
-    return `All you need is a light sweater!`
+    return 'All you need is a light sweater!'
   }  
 }
 ```
@@ -467,8 +464,79 @@ phraseHelper.innerHTML = phraseGenerator(data)
 
 Now refresh your page and submit a city name. You should see your conversation prompt appear!
 
-<!-- #### Dynamic Background Color -->
-<!-- NOTE FOR LOUISA: Add "Background Update" based on temp ranges  -->
+#### Dynamic Background Color
+
+Having a background color that complements and reenforces the weather data and conversation starter phrases of the specified city would be nice. Let's make it happen!
+
+We'll need to create a new helper function to handle this background color-changing task for us, as well as target the `section` element in our HTML that makes up the primary content area of our page.
+
+```javascript
+const mainSection = document.querySelector('section')
+
+const backgroundColorUpdate = () => {
+
+}
+```
+
+Now let's add our functionality. We can use the same `if` statmeent structure that we used for our phrase generator, this way the color changes will align with the phases changing.
+
+```javascript
+const mainSection = document.querySelector('section')
+
+const backgroundColorUpdate = () => {
+  if (data.main.temp >= "70") {
+
+  } else if (data.main.temp <= "30") {
+
+  } else {
+
+  }
+}
+```
+
+Our next step will be slightly different than what we've done previously in this tutorial. We're going to have our function add (and then remove) a class attribute to the `section` element. These classes have CSS rules written for them in `style.css` if you want to take a look! We'll be changing the color from cool to warm to hot based on the actual temperature of the specified city. We'll also need to pass in two parameters for this function can target the HTML element and work with the data being used from the API.
+
+```javascript
+const mainSection = document.querySelector('section')
+
+const backgroundColorUpdate = (element, data) => {
+  if (data.main.temp >= "70") {
+    element.removeAttribute("class")
+    element.classList.add("hot-temp-bg")
+  } else if (data.main.temp <= "30") {
+    element.removeAttribute("class")
+    element.classList.add("cool-temp-bg")
+  } else {
+    element.removeAttribute("class")
+    element.classList.add("mid-temp-bg")
+  }
+}
+```
+
+And, again, we'll call this new function in our `fetchData()` function. The line of code that will be added looks like this:
+
+```JavaScript
+  backgroundColorUpdate(mainSection, data)
+```
+
+Let's take one last look at `fetchData()` to see what it looks like now:
+
+```JavaScript
+const fetchData = (city) => {
+  const weatherData = updateCity(city)
+  fetch(weatherData)
+  .then(response => response.json())
+  .then(data => {
+    backgroundColorUpdate(mainSection, data)
+    phraseHelper.innerHTML = phraseGenerator(data)
+    cityNameDisplay.innerHTML = generateTitle(data)
+    weatherList.innerHTML = generateHTML(data)
+    nameInput.value = ''
+  })
+}
+```
+
+And with that, we've completed the functionality and UI refinement that will be covered in this tutorial! There are so many more exciting projects that can be done using the OpenWeather API suite, what we built today is just the tip of the iceberg.
 
 ---
 
