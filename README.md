@@ -231,25 +231,68 @@ let fetchData = (cityName) => {
 
 Reload your page in the browser and give it a try. You should see that the hard coded list of city-specific weather information is gone, and we now only see the form. When a city's name is entered into the input field and submitted, you should see the weather data populated with information for the user-specified city.
 
-This gives us basic functionality using data returned from the OpenWeather Current Weather Data API. Now we a platform to play around with the API, and we'll take a look at a couple of fun addition functionality and UI details to help sprout some ideas about new ways to utilize OpenWeather APIs.
+This gives us basic functionality using data returned from the OpenWeather Current Weather Data API. Now we a foundation ready to play around with the API, and we'll take a look at a couple of fun addition functionality and UI details to help sprout ideas about new ways to utilize OpenWeather APIs in future projects.
 
 #### UI Refinement and Additional Functionality
 
 <!-- NOTE FOR LOUISA: UI update with aside and the prompts on the left section -->
+Let's tidy up our UI and make it a bit more appealing to users and a bit less "HTML from the '90s." It would be nice to move the `H1` to a `header` and the form to an `aside` so we can more space for the primary content that we're pulling from the API. We also could use some copy to help clarify what we're looking at.
+
+It'd be nice to use a custom font, so we'll pull that into our `head` tag:
+
+```html
+<head>
+  <title>WeatherTalk</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+```
+
+Now we'll begin the layout and structural updates to our HTML:
+
+```HTML
+<body>
+  <header>
+    <h1>WeatherTalk</h1>
+    <h3>When distributed teams need to fill awkward conference-call silences,<br> they count on WeatherTalk.</h3>
+  </header>
+  <form>
+    <label for="city">Enter City Name</label>
+    <input id="city" type="text" value="">
+    <input type="submit" id="city-btn-js" value="Check The Weather">
+  </form>
+  <main class="main-wrap">
+    <aside>
+        <form>
+          <label for="city">Enter City Name</label>
+          <input id="city" type="text" value="">
+          <input type="submit" id="city-btn-js" value="Check The Weather">
+        </form>
+    </aside>
+    <section>
+      <h2 id="city-name-js">Let's check the weather!</h2>
+      <ul class="weather-list">
+        <!-- OWM data rendered here -->
+      </ul>
+    </section>
+  </main>
+  <script type="text/javascript" src="script.js"></script>
+</body>
+```
+
+What the app looks like in the browser hasn't changed significantly, but we've set ourselves up to do some work in our CSS to make the layout look a little nicer. It's pretty lightweight, but we're just going to make our app look a bit more intentional. Head over to the CSS from [the style.css file in this repo](https://github.com/LouisaBarrett/weathertalk/blob/main/style.css) and it to your own `style.css` file.
+
+Reload the page, and you should see a clearly defined header, side bar, and primary content section on your page.
+
 <!-- NOTE FOR LOUISA: Add "Conversation Prompts" based on temp ranges -->
 <!-- NOTE FOR LOUISA: Add "Background Update" based on temp ranges  -->
 
-<!-- ### Possible questions and/or misunderstandings
-* What concepts might be misunderstand, and why? -->
 
 #### Next Steps
 
 It's worth noting that it is not best practice to share an API key publicly as we've done in this tutorial -- we can get away with it while working locally and experimenting with how to play with data, but if this were a live site doing so would present security risks. This type of private data is typically found in a project's server-side code, which our small site does not have. If you're interested in making a static site like this live on a hosting platform such as GitHub Pages, take a look at a tool like Firebase. If this is something you're interested in exploring, [this blog post](https://medium.com/pan-labs/dynamic-web-apps-on-github-pages-for-free-ffac2b776d45) can point you in the right direction.
 
-<!-- #### The Closing
-* Check for understanding
-* Discuss any clarifications or student misconceptions
-* Review goals, further resources, and next steps -->
 
 ### Outside Resources / Further Reading
-* [FPO link to outside resource]()
+* [FPO link to outside resource and references]()
